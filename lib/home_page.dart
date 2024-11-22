@@ -15,7 +15,7 @@ class _BookListPageState extends State<BookListPage> {
 
   @override
   void initState(){
-    super.initState();
+    super.initState(); //digunakan untuk menginisialisasi variabel atau memanggil fungsi pada widget parent
     fetchBooks(); //fungsi untuk mengambil data pada tabel buku
   }
   //fungsi untuk mengambil data buku dari Supabase
@@ -36,17 +36,18 @@ class _BookListPageState extends State<BookListPage> {
         title: Center(
           child: Text('Daftar Buku')
         ),
-        backgroundColor: Colors.pink[50],
+        backgroundColor: Colors.pink[50], //warna background appbar
         actions: [
           IconButton(
             icon: Icon(Icons.refresh),
-            onPressed: fetchBooks, //Tombol untuk refrresh
+            onPressed: fetchBooks, //Tombol untuk refresh data buku
           ),
         ],
       ),
       body: books.isEmpty
-          ? const Center(child: CircularProgressIndicator()) //digunakan untuk menampilkan loading indikator
+          ? const Center(child: CircularProgressIndicator()) //digunakan untuk menampilkan indikator loading saat belum ada data yang tersedia
           : ListView.builder(
+            //untuk membuat tampilan list secara urut
             itemCount: books.length,
             itemBuilder: (context, index){
               final book = books [index];
@@ -58,7 +59,7 @@ class _BookListPageState extends State<BookListPage> {
                   ),
                 ),
                 subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start, // digunakan untuk mengatur posisi teks dibagain kiri
                   children: [
                     Text(book['author'] ?? 'No Author',
                     style: TextStyle(
@@ -66,7 +67,7 @@ class _BookListPageState extends State<BookListPage> {
                       fontSize: 14,
                     ),
                     ),
-                    Text(book['description'] ?? 'No Description', 
+                    Text(book['description'] ?? 'No Description', // '??' digunakan untuk menampilkan teks default jika data buku kosong 
                     style: TextStyle(
                       fontSize: 12,
                     ),
@@ -80,19 +81,21 @@ class _BookListPageState extends State<BookListPage> {
                     IconButton(
                       icon: Icon(Icons.edit, color: Colors.blue),
                       onPressed: () {
+                        //arahkan ke halaman editbookpage untuk mengirim data buku yang akan diedit
                         // Navigator.push(
-                        //   // context,
+                        // setelah ditekan akan masuk dibagian edit buku
+                           // context,
                           // MaterialPageRoute(
                           //   builder: (context) => EditBookPage(book: book)
                           // ),
                         // ).then((_){
-                        //   fetchBooks(); //refresh data setelah kembali dari
+                        //   fetchBooks(); //refresh data setelah kembali dari halaman editbookpage
                         // });
                       },
                     ),
                     //Tombol Delete
                     IconButton(
-                      icon: Icon(Icons.delete, color: Colors.red),
+                      icon: Icon(Icons.delete, color: Colors.red), //tombol untuk menghapus data buku
                       onPressed: () {
                         //konfirmasi sebelum menghapus buku ALERT
                         showDialog(
