@@ -8,14 +8,18 @@ class AddBookPage extends StatefulWidget {
   const AddBookPage({super.key});
 
   @override
-  State<AddBookPage> createState() => _AddBookPageState(); // Karena stateful, maka harus membuat state
+  State<AddBookPage> createState() =>
+      _AddBookPageState(); // Karena stateful, maka harus membuat state
 }
 
 class _AddBookPageState extends State<AddBookPage> {
   final _formKey = GlobalKey<FormState>(); //id
-  final TextEditingController _titleController = TextEditingController(); //title
-  final TextEditingController _authorController = TextEditingController(); //author
-  final TextEditingController _descriptionController = TextEditingController(); //deskripsi
+  final TextEditingController _titleController =
+      TextEditingController(); //title
+  final TextEditingController _authorController =
+      TextEditingController(); //author
+  final TextEditingController _descriptionController =
+      TextEditingController(); //deskripsi
 
   Future<void> _addBook(context) async {
     // Validasi form
@@ -53,9 +57,7 @@ class _AddBookPageState extends State<AddBookPage> {
 
     // Refresh data buku
     Navigator.pushReplacement(
-      context, 
-      MaterialPageRoute(builder: (context) => const BookListPage())
-    );
+        context, MaterialPageRoute(builder: (context) => const BookListPage()));
   }
 
   @override
@@ -81,7 +83,8 @@ class _AddBookPageState extends State<AddBookPage> {
               TextFormField(
                 controller: _authorController,
                 decoration: const InputDecoration(labelText: 'Author'),
-                validator: (value) { // Agar ketika tidak diisi muncul pesan 
+                validator: (value) {
+                  // Agar ketika tidak diisi muncul pesan
                   if (value == null || value.isEmpty) {
                     return 'Please enter the author';
                   }
