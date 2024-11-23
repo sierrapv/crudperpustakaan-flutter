@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-// import 'insert.dart';
+import 'insert.dart';
 // import 'update.dart';
 class BookListPage extends StatefulWidget{
   const BookListPage({super.key});
@@ -34,7 +34,7 @@ class _BookListPageState extends State<BookListPage> {
     return Scaffold(
       appBar: AppBar(
         title: Center(
-          child: Text('Daftar Buku')
+          child: Text('Book List')
         ),
         backgroundColor: Colors.pink[50], //warna background appbar
         actions: [
@@ -128,7 +128,14 @@ class _BookListPageState extends State<BookListPage> {
                 ),
               );
             },
-          ),
+          ), 
+        floatingActionButton: FloatingActionButton(onPressed: (){
+          Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const AddBookPage())).then((_){
+              fetchBooks();
+            });
+          },child: const Icon(Icons.add),
+        ),
     );
   }
 
